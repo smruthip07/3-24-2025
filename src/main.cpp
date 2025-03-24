@@ -143,7 +143,8 @@ int main() {
   std::vector<std::vector<unsigned char>> ans1=Multiply(i3.getPixelData(), i8.getPixelData());
   std::ofstream output1("C:/Users/smrut/CLionProjects/untitled14/output/output1.tga", std::ios::binary);
   vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output1.tga", ans1, i3);
-  std::cout << '\n';
+  std::cout << '\n' << std::endl;
+
   // //2.
   // auto lay2(std::ifstream("layer2.tga", std::ios::binary));
   // auto car(std::ifstream("car.tga", std::ios::binary));
