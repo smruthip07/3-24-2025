@@ -43,3 +43,5 @@ Image::Image(std::ifstream& file){
 std::vector<std::vector<unsigned char>> Image::getPixelData(){
     return pixelData;
 }
+
+// ./project1.out ./src/output/part1.tga .input/layer1.tga .input/pattern1.tga Multiply
