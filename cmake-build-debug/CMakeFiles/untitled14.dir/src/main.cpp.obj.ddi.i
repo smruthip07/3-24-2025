@@ -49293,6 +49293,34 @@ std::vector<std::vector<unsigned char>> Multiply(std::vector<std::vector<unsigne
   return img3;
 }
 
+std::vector<std::vector<unsigned char>> Multiply(std::vector<std::vector<unsigned char>> img1, const int b, const int g, const int r) {
+  std::vector<std::vector<unsigned char>> img3;
+  img3.resize(img1.size());
+  std::vector<unsigned char> temp;
+  temp.resize(3);
+
+  for (int i = 0; i < img1.size(); i++) {
+    int blue = img1[i][0]*b;
+    int green = img1[i][1]*g;
+    int red = img1[i][2]*r;
+    if (blue>255) {
+      blue = 255;
+    }
+    if (green>255) {
+      green = 255;
+    }
+    if (red>255) {
+      red = 255;
+    }
+    temp[0] = static_cast<unsigned char>(blue);
+    temp[1] = static_cast<unsigned char>(green);
+    temp[2] = static_cast<unsigned char>(red);
+    img3[i].resize(temp.size());
+    img3[i] = temp;
+    }
+  return img3;
+  }
+
 std::vector<std::vector<unsigned char>> Screen(std::vector<std::vector<unsigned char>> img1, std::vector<std::vector<unsigned char>> img2) {
   std::vector<std::vector<unsigned char>> img3;
   img3.resize(img1.size());
@@ -49301,7 +49329,7 @@ std::vector<std::vector<unsigned char>> Screen(std::vector<std::vector<unsigned 
 
   for (int i = 0; i < img1.size(); i++) {
     for (int j = 0; j<3; j++) {
-      temp[j] = static_cast<unsigned char>(1 - (255 * (1 - img1[i][j]/255.0f) * (1 - img2[i][j]/255.0f)));
+      temp[j] = static_cast<unsigned char> (255 * (1 - ((1 - img1[i][j]/255.0f) * (1 - img2[i][j]/255.0f))));
     }
     img3[i] = temp;
   }
@@ -49316,7 +49344,11 @@ std::vector<std::vector<unsigned char>> Subtract(std::vector<std::vector<unsigne
 
   for (int i = 0; i < img1.size(); i++) {
     for (int j = 0; j<3; j++) {
-      temp[j] = img1[i][j] - img2[i][j];
+      if (img1[i][j] < img2[i][j]) {
+        temp[j] = 0;
+      } else {
+        temp[j] = img1[i][j] - img2[i][j];
+    }
     }
     img3[i] = temp;
   }
@@ -49332,7 +49364,39 @@ std::vector<std::vector<unsigned char>> Addition(std::vector<std::vector<unsigne
   for (int i = 0; i < img1.size(); i++) {
     for (int j = 0; j<3; j++) {
       temp[j] = img1[i][j] + img2[i][j];
+      if (temp[j] < 0) {
+        temp[j] = 0;
+      }
+      if (temp[j] > 255) {
+        temp[j] = 255;
+      }
     }
+    img3[i] = temp;
+  }
+  return img3;
+}
+
+
+
+std::vector<std::vector<unsigned char>> Addition(std::vector<std::vector<unsigned char>> img1, const int b, const int g, const int r) {
+  std::vector<std::vector<unsigned char>> img3;
+  img3.resize(img1.size());
+  std::vector<unsigned char> temp;
+  temp.resize(3);
+  for (int i = 0; i < img1.size(); i++) {
+    temp[0] = img1[i][0] + b;
+    temp[1] = img1[i][1] + g;
+    temp[2] = img1[i][2] + r;
+    if (img1[i][0] + b > 255) {
+      temp[0] = 255;
+    }
+    if (img1[i][1] + g > 255) {
+      temp[1] = 255;
+    }
+    if (img1[i][2] + r > 255) {
+      temp[2] = 255;
+    }
+
     img3[i] = temp;
   }
   return img3;
@@ -49349,14 +49413,71 @@ std::vector<std::vector<unsigned char>> Overlay(std::vector<std::vector<unsigned
   for (int i = 0; i < img2.size(); i++) {
     for (int j = 0; j<3; j++) {
       if (img2[i][j]/255.0f <= 0.5) {
-        temp[j] = 2 * img1[i][j]/255 * img2[i][j];
+        temp[j] =255 * 2 * (img1[i][j]/255.0f) * (img2[i][j]/255.0f);
       }
       if (img2[i][j]/255.0f > 0.5) {
-        temp[j] = 1 - (2 * (1-img1[i][j]/255) * (1-img2[i][j]));
+        temp[j] = 255 * (1 - (2 * (1-img1[i][j]/255.0f) * (1-img2[i][j]/255.0f)));
       }
     }
     img3[i] = temp;
   }
+  return img3;
+}
+
+std::vector<std::vector<unsigned char>> Seperate(std::vector<std::vector<unsigned char>> img1, std::string color) {
+
+
+  std::vector<unsigned char> temp;
+  temp.resize(3);
+  int channel;
+  if (color == "blue") {
+    channel = 0;
+  }
+  if (color == "green") {
+    channel = 1;
+  }
+  if (color == "red") {
+    channel = 2;
+  }
+
+  for (int i = 0; i < img1.size(); i++) {
+    temp[0] = img1[i][channel];
+    temp[1] = img1[i][channel];
+    temp[2] = img1[i][channel];
+    img1[i] = temp;
+  }
+  return img1;
+}
+
+std::vector<std::vector<unsigned char>> Combine(std::vector<std::vector<unsigned char>> img1, std::vector<std::vector<unsigned char>> img2, std::vector<std::vector<unsigned char>> img3) {
+  std::vector<std::vector<unsigned char>> img4;
+  img4.resize(img1.size());
+  std::vector<unsigned char> temp;
+  temp.resize(3);
+
+  for (int i = 0; i < img1.size(); i++) {
+    img4[i].resize(3);
+    img4[i][0] = img1[i][0];
+    img4[i][1] = img2[i][1];
+    img4[i][2] = img3[i][2];
+  }
+  return img4;
+}
+
+std::vector<std::vector<unsigned char>> Rotate(Image img1) {
+  int width = img1.width;
+  int height = img1.height;
+  std::vector<std::vector<unsigned char>> img2 = img1.getPixelData();
+  std::vector<std::vector<unsigned char>> img3;
+  img3.resize(img2.size());
+
+  for (int i = 0; i < img2.size(); i++) {
+    img3[i].resize(3);
+    for (int j = 0; j<3; j++) {
+      img3[i][j] = img2[img2.size() - 1 - i][j];
+    }
+  }
+
   return img3;
 }
 
@@ -49402,7 +49523,6 @@ void vecToTga(const std::string& output, std::vector<std::vector<unsigned char>>
 
 int main() {
 
-
   std::ifstream lay1("C:/Users/smrut/CLionProjects/untitled14/input/layer1.tga", std::ios::binary);
   std::ifstream pat1("C:/Users/smrut/CLionProjects/untitled14/input/pattern1.tga", std::ios::binary);
   Image i8(pat1);
@@ -49410,6 +49530,69 @@ int main() {
   std::vector<std::vector<unsigned char>> ans1=Multiply(i3.getPixelData(), i8.getPixelData());
   std::ofstream output1("C:/Users/smrut/CLionProjects/untitled14/output/output1.tga", std::ios::binary);
   vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output1.tga", ans1, i3);
-# 179 "C:/Users/smrut/CLionProjects/untitled14/src/main.cpp"
+  std::cout << '\n' << std::endl;
+
+
+  auto lay2(std::ifstream("C:/Users/smrut/CLionProjects/untitled14/input/layer2.tga", std::ios::binary));
+  auto car(std::ifstream("C:/Users/smrut/CLionProjects/untitled14/input/car.tga", std::ios::binary));
+  Image i4(lay2);
+  Image i1(car);
+  std::vector<std::vector<unsigned char>> ans2=Subtract(i1.getPixelData(), i4.getPixelData());
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output2.tga", ans2, i4);
+
+
+  std::ifstream pat2("C:/Users/smrut/CLionProjects/untitled14/input/pattern2.tga", std::ios::binary);
+  std::ifstream tex("C:/Users/smrut/CLionProjects/untitled14/input/text.tga", std::ios::binary);
+  Image i9(pat2);
+  Image i10(tex);
+  std::vector<std::vector<unsigned char>> ans31=Multiply(i3.getPixelData(), i9.getPixelData());
+  std::vector<std::vector<unsigned char>> ans32= Screen(ans31, i10.getPixelData());
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output3.tga", ans32, i10);
+
+
+  std::ifstream cir("C:/Users/smrut/CLionProjects/untitled14/input/circles.tga", std::ios::binary);
+  Image i2(cir);
+  std::vector<std::vector<unsigned char>> ans4 = Subtract(Multiply(i4.getPixelData(), i2.getPixelData()), i9.getPixelData());
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output4.tga", ans4, i9);
+
+
+  std::vector<std::vector<unsigned char>> ans5 = Overlay(i3.getPixelData(), i8.getPixelData());
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output5.tga", ans5, i9);
+
+
+  std::vector<std::vector<unsigned char>> ans6 = Addition(i1.getPixelData(), 0, 200, 0);
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output6.tga", ans6, i1);
+
+
+
+  std::vector<std::vector<unsigned char>> ans7 = Multiply(i1.getPixelData(), 0, 1, 4);
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output7.tga", ans7, i1);
+
+
+  std::vector<std::vector<unsigned char>> ans81 = Seperate(i1.getPixelData(), "red");
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part8_r.tga", ans81, i1);
+
+  std::vector<std::vector<unsigned char>> ans82 = Seperate(i1.getPixelData(), "green");
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part8_g.tga", ans82, i1);
+
+  std::vector<std::vector<unsigned char>> ans83 = Seperate(i1.getPixelData(), "blue");
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part8_b.tga", ans83, i1);
+
+
+  std::ifstream blue("C:/Users/smrut/CLionProjects/untitled14/input/layer_blue.tga", std::ios::binary);
+  Image b(blue);
+  std::ifstream green("C:/Users/smrut/CLionProjects/untitled14/input/layer_green.tga", std::ios::binary);
+  Image g(green);
+  std::ifstream red("C:/Users/smrut/CLionProjects/untitled14/input/layer_red.tga", std::ios::binary);
+  Image r(red);
+  std::vector<std::vector<unsigned char>> ans9 = Combine(b.getPixelData(), g.getPixelData(), r.getPixelData());
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output9.tga", ans9, r);
+
+
+  std::ifstream tex2("C:/Users/smrut/CLionProjects/untitled14/input/text2.tga", std::ios::binary);
+  Image i11(tex2);
+  std::vector<std::vector<unsigned char>> ans10 = Rotate(i11);
+  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/output10.tga", ans10, i11);
+
   return 0;
 }
