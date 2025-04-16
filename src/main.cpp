@@ -256,20 +256,20 @@ void vecToTga(const std::string& output, std::vector<std::vector<unsigned char>>
 
 int main() {
   //1.
-  std::ifstream lay1("C:/Users/smrut/CLionProjects/untitled14/input/layer1.tga", std::ios::binary);
-  std::ifstream pat1("C:/Users/smrut/CLionProjects/untitled14/input/pattern1.tga", std::ios::binary);
+  std::ifstream lay1("input/layer1.tga", std::ios::binary);
+  std::ifstream pat1("input/pattern1.tga", std::ios::binary);
   Image i8(pat1);
   Image i3(lay1);
   std::vector<std::vector<unsigned char>> ans1=Multiply(i3.getPixelData(), i8.getPixelData());
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part1.tga", ans1, i3);
+  vecToTga("output/part1.tga", ans1, i3);
 
   //2.
-  auto lay2(std::ifstream("C:/Users/smrut/CLionProjects/untitled14/input/layer2.tga", std::ios::binary));
-  auto car(std::ifstream("C:/Users/smrut/CLionProjects/untitled14/input/car.tga", std::ios::binary));
+  auto lay2(std::ifstream("input/layer2.tga", std::ios::binary));
+  auto car(std::ifstream("input/car.tga", std::ios::binary));
   Image i4(lay2);
   Image i1(car);
   std::vector<std::vector<unsigned char>> ans2=Subtract(i1.getPixelData(), i4.getPixelData());
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part2.tga", ans2, i4);
+  vecToTga("output/part2.tga", ans2, i4);
 
   //3.
   std::ifstream pat2("C:/Users/smrut/CLionProjects/untitled14/input/pattern2.tga", std::ios::binary);
