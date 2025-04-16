@@ -7,4 +7,5 @@ add_executable(untitled14 src/main.cpp src/Image.cpp src/Image.h
         src/Makefile
         src/Makefile
         src/Makefile
-        src/Makefile)
+        src/Makefile
+        Makefile)
