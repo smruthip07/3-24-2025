@@ -4,8 +4,9 @@ build:
 clean:
 	rm project1.out
 	rm project1.exe
+	rm output/part1.tga output/part2.tga output/part3.tga output/part4.tga output/part5.tga output/part6.tga output/part7.tga output/part8_r.tga output/part8_g.tga output/part8_b.tga output/part9.tga output/part10.tga
 
-tasks: build
+tasks:
 	./project1.out output/part1.tga input/layer1.tga input/pattern1.tga Multiply
 	./project1.out output/part2.tga input/layer2.tga input/car.tga Subtract
 	./project1.out output/part3.tga input/pattern2.tga input/text.tga Multiply
