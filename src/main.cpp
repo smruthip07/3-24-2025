@@ -253,7 +253,7 @@ void vecToTga(const std::string& output, std::vector<std::vector<unsigned char>>
 }
 
 
-int main() {
+int main(int argc, char* argv[]) {
   //1.
   std::ifstream lay1("input/layer1.tga", std::ios::binary);
   std::ifstream pat1("input/pattern1.tga", std::ios::binary);
