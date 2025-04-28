@@ -6,7 +6,6 @@
 #include <vector>
 //#include "main.h"
 #include "Image.h"
-#include <iostream>
 #include <fstream>
 #include <cstdint>
 
@@ -256,12 +255,12 @@ void vecToTga(const std::string& output, std::vector<std::vector<unsigned char>>
 
 int main() {
   //1.
-  std::ifstream lay1("untitled14/input/layer1.tga", std::ios::binary);
-  std::ifstream pat1("untitled14/input/pattern1.tga", std::ios::binary);
+  std::ifstream lay1("input/layer1.tga", std::ios::binary);
+  std::ifstream pat1("input/pattern1.tga", std::ios::binary);
   Image i8(pat1);
   Image i3(lay1);
   std::vector<std::vector<unsigned char>> ans1=Multiply(i3.getPixelData(), i8.getPixelData());
-  vecToTga("untitled14/output/part1.tga", ans1, i3);
+  vecToTga("output/part1.tga", ans1, i3);
 
   //2.
   auto lay2(std::ifstream("input/layer2.tga", std::ios::binary));
@@ -272,58 +271,58 @@ int main() {
   vecToTga("output/part2.tga", ans2, i4);
 
   //3.
-  std::ifstream pat2("C:/Users/smrut/CLionProjects/untitled14/input/pattern2.tga", std::ios::binary);
-  std::ifstream tex("C:/Users/smrut/CLionProjects/untitled14/input/text.tga", std::ios::binary);
+  std::ifstream pat2("input/pattern2.tga", std::ios::binary);
+  std::ifstream tex("input/text.tga", std::ios::binary);
   Image i9(pat2);
   Image i10(tex);
   std::vector<std::vector<unsigned char>> ans31=Multiply(i3.getPixelData(), i9.getPixelData());
   std::vector<std::vector<unsigned char>> ans32= Screen(ans31, i10.getPixelData());
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part3.tga", ans32, i10);
+  vecToTga("output/part3.tga", ans32, i10);
 
   //4.
-  std::ifstream cir("C:/Users/smrut/CLionProjects/untitled14/input/circles.tga", std::ios::binary);
+  std::ifstream cir("input/circles.tga", std::ios::binary);
   Image i2(cir);
   std::vector<std::vector<unsigned char>> ans4 = Subtract(Multiply(i4.getPixelData(), i2.getPixelData()), i9.getPixelData());
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part4.tga", ans4, i9);
+  vecToTga("output/part4.tga", ans4, i9);
 
   //5.
   std::vector<std::vector<unsigned char>> ans5 = Overlay(i3.getPixelData(), i8.getPixelData());
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part5.tga", ans5, i9);
+  vecToTga("output/part5.tga", ans5, i9);
 
   //6.
   std::vector<std::vector<unsigned char>> ans6 = Addition(i1.getPixelData(), 0, 200, 0);
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part6.tga", ans6, i1);
+  vecToTga("output/part6.tga", ans6, i1);
 
   //7.
 
   std::vector<std::vector<unsigned char>> ans7 = Multiply(i1.getPixelData(), 0, 1, 4);
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part7.tga", ans7, i1);
+  vecToTga("output/part7.tga", ans7, i1);
 
   //8.
   std::vector<std::vector<unsigned char>> ans81 = Seperate(i1.getPixelData(), "red");
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part8_r.tga", ans81, i1);
+  vecToTga("output/part8_r.tga", ans81, i1);
 
   std::vector<std::vector<unsigned char>> ans82 = Seperate(i1.getPixelData(), "green");
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part8_g.tga", ans82, i1);
+  vecToTga("output/part8_g.tga", ans82, i1);
 
   std::vector<std::vector<unsigned char>> ans83 = Seperate(i1.getPixelData(), "blue");
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part8_b.tga", ans83, i1);
+  vecToTga("output/part8_b.tga", ans83, i1);
 
   //9.
-  std::ifstream blue("C:/Users/smrut/CLionProjects/untitled14/input/layer_blue.tga", std::ios::binary);
+  std::ifstream blue("input/layer_blue.tga", std::ios::binary);
   Image b(blue);
-  std::ifstream green("C:/Users/smrut/CLionProjects/untitled14/input/layer_green.tga", std::ios::binary);
+  std::ifstream green("input/layer_green.tga", std::ios::binary);
   Image g(green);
-  std::ifstream red("C:/Users/smrut/CLionProjects/untitled14/input/layer_red.tga", std::ios::binary);
+  std::ifstream red("input/layer_red.tga", std::ios::binary);
   Image r(red);
   std::vector<std::vector<unsigned char>> ans9 = Combine(b.getPixelData(), g.getPixelData(), r.getPixelData());
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part9.tga", ans9, r);
+  vecToTga("output/part9.tga", ans9, r);
 
   //10.
-  std::ifstream tex2("C:/Users/smrut/CLionProjects/untitled14/input/text2.tga", std::ios::binary);
+  std::ifstream tex2("input/text2.tga", std::ios::binary);
   Image i11(tex2);
   std::vector<std::vector<unsigned char>> ans10 = Rotate(i11);
-  vecToTga("C:/Users/smrut/CLionProjects/untitled14/output/part10.tga", ans10, i11);
+  vecToTga("output/part10.tga", ans10, i11);
 
   return 0;
 }
