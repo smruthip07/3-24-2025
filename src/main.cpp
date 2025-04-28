@@ -256,12 +256,12 @@ void vecToTga(const std::string& output, std::vector<std::vector<unsigned char>>
 
 int main() {
   //1.
-  std::ifstream lay1("input/layer1.tga", std::ios::binary);
-  std::ifstream pat1("input/pattern1.tga", std::ios::binary);
+  std::ifstream lay1("untitled14/input/layer1.tga", std::ios::binary);
+  std::ifstream pat1("untitled14/input/pattern1.tga", std::ios::binary);
   Image i8(pat1);
   Image i3(lay1);
   std::vector<std::vector<unsigned char>> ans1=Multiply(i3.getPixelData(), i8.getPixelData());
-  vecToTga("output/part1.tga", ans1, i3);
+  vecToTga("untitled14/output/part1.tga", ans1, i3);
 
   //2.
   auto lay2(std::ifstream("input/layer2.tga", std::ios::binary));
