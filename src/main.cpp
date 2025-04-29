@@ -289,11 +289,17 @@ void vecToTga(const std::string& output, std::vector<std::vector<unsigned char>>
 }
 
 
-int main(int argc, char* argv[]) {
+int main() {
 
   //1.
   std::ifstream lay1("input/layer1.tga", std::ios::binary);
+  if (!lay1) {
+    throw std::runtime_error("file not open");
+  }
   std::ifstream pat1("input/pattern1.tga", std::ios::binary);
+  if (!pat1) {
+    throw std::runtime_error("file not open");
+  }
   Image i8(pat1);
   Image i3(lay1);
   std::vector<std::vector<unsigned char>> ans1=Multiply(i3.getPixelData(), i8.getPixelData());
