@@ -5,5 +5,4 @@ run: build
 	./project1.out
 
 clean:
-	rm -f project1.out project1.exe
 	rm -f output/part1.tga output/part2.tga output/part3.tga output/part4.tga output/part5.tga output/part6.tga output/part7.tga output/part8_r.tga output/part8_g.tga output/part8_b.tga output/part9.tga output/part10.tga
