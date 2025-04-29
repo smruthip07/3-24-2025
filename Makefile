@@ -1,5 +1,5 @@
 build:
-	g++ -std=c++20 -o project1.out src/main.cpp
+	g++ -std=c++20 -o project1.out src/main.cpp src/Image.cpp
 
 run: build
 	./project1.out
