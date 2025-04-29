@@ -13,6 +13,10 @@
 std::vector<std::vector<unsigned char>> Multiply(std::vector<std::vector<unsigned char>> img1, std::vector<std::vector<unsigned char>> img2){
   std::vector<std::vector<unsigned char>> img3;
   img3.resize(img1.size());
+  for (auto& pixel : img3) {
+    pixel.resize(3);
+  }
+
   std::vector<unsigned char> temp;
   temp.resize(3);
 
@@ -28,6 +32,10 @@ std::vector<std::vector<unsigned char>> Multiply(std::vector<std::vector<unsigne
 std::vector<std::vector<unsigned char>> Multiply(std::vector<std::vector<unsigned char>> img1, const int b, const int g, const int r) {
   std::vector<std::vector<unsigned char>> img3;
   img3.resize(img1.size());
+  for (auto& pixel : img3) {
+    pixel.resize(3);
+  }
+
   std::vector<unsigned char> temp;
   temp.resize(3);
 
@@ -56,6 +64,10 @@ std::vector<std::vector<unsigned char>> Multiply(std::vector<std::vector<unsigne
 std::vector<std::vector<unsigned char>> Screen(std::vector<std::vector<unsigned char>> img1, std::vector<std::vector<unsigned char>> img2) {
   std::vector<std::vector<unsigned char>> img3;
   img3.resize(img1.size());
+  for (auto& pixel : img3) {
+    pixel.resize(3);
+  }
+
   std::vector<unsigned char> temp;
   temp.resize(3);
 
@@ -71,6 +83,10 @@ std::vector<std::vector<unsigned char>> Screen(std::vector<std::vector<unsigned 
 std::vector<std::vector<unsigned char>> Subtract(std::vector<std::vector<unsigned char>> img1, std::vector<std::vector<unsigned char>> img2) {
   std::vector<std::vector<unsigned char>> img3;
   img3.resize(img1.size());
+  for (auto& pixel : img3) {
+    pixel.resize(3);
+  }
+
   std::vector<unsigned char> temp;
   temp.resize(3);
 
@@ -90,6 +106,10 @@ std::vector<std::vector<unsigned char>> Subtract(std::vector<std::vector<unsigne
 std::vector<std::vector<unsigned char>> Addition(std::vector<std::vector<unsigned char>> img1, std::vector<std::vector<unsigned char>> img2) {
   std::vector<std::vector<unsigned char>> img3;
   img3.resize(img1.size());
+  for (auto& pixel : img3) {
+    pixel.resize(3);
+  }
+
   std::vector<unsigned char> temp;
   temp.resize(3);
 
@@ -113,6 +133,10 @@ std::vector<std::vector<unsigned char>> Addition(std::vector<std::vector<unsigne
 std::vector<std::vector<unsigned char>> Addition(std::vector<std::vector<unsigned char>> img1, const int b, const int g, const int r) {
   std::vector<std::vector<unsigned char>> img3;
   img3.resize(img1.size());
+  for (auto& pixel : img3) {
+    pixel.resize(3);
+  }
+
   std::vector<unsigned char> temp;
   temp.resize(3);
   for (int i = 0; i < img1.size(); i++) {
@@ -139,6 +163,10 @@ std::vector<std::vector<unsigned char>> Addition(std::vector<std::vector<unsigne
 std::vector<std::vector<unsigned char>> Overlay(std::vector<std::vector<unsigned char>> img1, std::vector<std::vector<unsigned char>> img2) {
   std::vector<std::vector<unsigned char>> img3;
   img3.resize(img1.size());
+  for (auto& pixel : img3) {
+    pixel.resize(3);
+  }
+
   std::vector<unsigned char> temp;
   temp.resize(3);
 
@@ -184,6 +212,10 @@ std::vector<std::vector<unsigned char>> Seperate(std::vector<std::vector<unsigne
 std::vector<std::vector<unsigned char>> Combine(std::vector<std::vector<unsigned char>> img1, std::vector<std::vector<unsigned char>> img2, std::vector<std::vector<unsigned char>> img3) {
   std::vector<std::vector<unsigned char>> img4;
   img4.resize(img1.size());
+  for (auto& pixel : img4) {
+    pixel.resize(3);
+  }
+
   std::vector<unsigned char> temp;
   temp.resize(3);
 
@@ -202,6 +234,10 @@ std::vector<std::vector<unsigned char>> Rotate(Image img1) {
   std::vector<std::vector<unsigned char>> img2 = img1.getPixelData();
   std::vector<std::vector<unsigned char>> img3;
   img3.resize(img2.size());
+  for (auto& pixel : img3) {
+    pixel.resize(3);
+  }
+
 
   for (int i = 0; i < img2.size(); i++) {
     img3[i].resize(3);
