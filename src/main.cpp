@@ -254,11 +254,11 @@ void vecToTga(const std::string& output, std::vector<std::vector<unsigned char>>
 
 
 int main(int argc, char* argv[]) {
-  if (argc < 5) {
-    std::cerr << "Error: Not enough arguments.\n";
-    std::cerr << "Usage: " << argv[0] << " <output> <input1> <input2> <operation>\n";
-    return 1;
-  }
+  // if (argc < 5) {
+  //   std::cerr << "Error: Not enough arguments.\n";
+  //   std::cerr << "Usage: " << argv[0] << " <output> <input1> <input2> <operation>\n";
+  //   return 1;
+  // }
   //1.
   std::ifstream lay1("input/layer1.tga", std::ios::binary);
   std::ifstream pat1("input/pattern1.tga", std::ios::binary);
