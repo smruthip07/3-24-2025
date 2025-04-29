@@ -188,10 +188,10 @@ std::vector<std::vector<unsigned char>> Combine(std::vector<std::vector<unsigned
   temp.resize(3);
 
   for (int i = 0; i < img1.size(); i++) {
-    img4[i].resize(3);
-    img4[i][0] =  img1[i][0];
-    img4[i][1] = img2[i][1];
-    img4[i][2] = img3[i][2];
+    temp[0] = img1[i][0];
+    temp[1] = img2[i][1];
+    temp[2] = img3[i][2];
+    img4[i] = temp;
   }
   return img4;
 }
